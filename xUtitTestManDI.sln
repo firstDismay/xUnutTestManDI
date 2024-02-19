@@ -5,7 +5,10 @@ VisualStudioVersion = 17.9.34526.213
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManDI", "..\ManDI\ManDI.csproj", "{EAE62557-DC8B-4885-B786-227746F7978C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnutTestManDI", "xUnutTestManDI.csproj", "{C1596474-84EE-4B1F-867E-3622896C1294}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnutTestManDI", "xUnutTestManDI.csproj", "{C1596474-84EE-4B1F-867E-3622896C1294}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EAE62557-DC8B-4885-B786-227746F7978C} = {EAE62557-DC8B-4885-B786-227746F7978C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
