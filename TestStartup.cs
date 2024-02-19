@@ -29,11 +29,11 @@ namespace xUnitTestManDI
                 //Получаем значения переменных окружения
                 ConnectionStrings = string.Format(
                     @"Host={0};Database={1};Port={2}; Username={3};Password={4};",
-                configuration["SERVER"],
-                configuration["DATABASE"],
-                configuration["PORT"],
-                configuration["USER"],
-                configuration["PASSWORD"])
+                configuration["xUT_SERVER"],
+                configuration["xUT_DATABASE"],
+                configuration["xUT_PORT"],
+                configuration["xUT_USER"],
+                configuration["xUT_PASSWORD"])
             };
 
             // Add services to the container.
@@ -41,7 +41,6 @@ namespace xUnitTestManDI
                services => services.AddScoped<ISignatureExtractor, SignatureExtractorForComposite>(),
                services => services.AddScoped<ICommandExecutor, command_executor>(),
                services => services.AddScoped<IExportExecutor, export_executor>());
-
         }
     }
 
