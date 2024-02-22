@@ -6,31 +6,36 @@ using ManDI.composite.entities.conception;
 using ManDI.executor;
 using Microsoft.Extensions.DependencyInjection;
 using System.Data;
+using XUnit.Test.config;
 
-namespace xUnitTestManDI
+namespace XUnit.Test.UnitTest
 {
-    public class UnitTestManDI
+    [Collection("ManDiTestCollection")]
+    [TestCaseOrderer(
+    ordererTypeName: "XUnit.Test.config.PriorityOrderer",
+    ordererAssemblyName: "XUnit.Test")]
+    public class ManDiUnitTest
     {
         private static ServiceProvider _serviceProvider;
 
-        public UnitTestManDI()
+        public ManDiUnitTest()
         {
             var serviceCollection = new ServiceCollection();
             new TestStartup().ConfigureServices(serviceCollection);
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
-        [Fact]
+        [Fact, TestPriority(1)]
         public void ConceptionTest()
         {
             var executor = _serviceProvider.GetRequiredService<ICommandExecutor>();
 
             conception_add conception_add = new conception_add()
-            { 
+            {
                 iname = "Тестовая Концепция №3",
                 idesc = "Тестовая Концепция №3"
             };
-            long ConceptionId  = (long)executor.ExecuteScalar(conception_add);
+            long ConceptionId = (long)executor.ExecuteScalar(conception_add);
 
             Assert.True(ConceptionId != 0, "ConceptionId не должен быть равен нулю");
 
@@ -51,9 +56,9 @@ namespace xUnitTestManDI
             vconception conception = (vconception)executor.ExecuteScalar(conception_by_id);
 
             Assert.True(conception.name == "Тестовая Концепция №30", "Название концепции не изменено");
-                        
+
             conception_by_all conception_by_all = new conception_by_all();
-            System.Data.DataTable table = executor.Fill(conception_by_all);
+            DataTable table = executor.Fill(conception_by_all);
 
             List<vconception> ListConception = new List<vconception>();
             foreach (DataRow row in table.Rows)
@@ -64,10 +69,28 @@ namespace xUnitTestManDI
             Assert.True(ListConception.Count > 0, "Количество концепций должно быть больше 0");
 
             conception_del conception_del = new conception_del()
-            { 
+            {
                 iid = ConceptionId
             };
             executor.ExecuteNonQuery(conception_del);
+        }
+
+        [Fact, TestPriority(2)]
+        public void Test2()
+        {
+            
+        }
+
+        [Fact, TestPriority(3)]
+        public void Test4()
+        {
+
+        }
+
+        [Fact, TestPriority(5)]
+        public void Test5()
+        {
+
         }
     }
 }

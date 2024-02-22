@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace xUnitTestManDI
+namespace XUnit.Test.UnitTest
 {
     public class TestStartup
     {
