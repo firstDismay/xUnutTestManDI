@@ -5,6 +5,7 @@ using ManDI.extractor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Text;
 
 namespace XUnit.Test.UnitTest
 {
@@ -12,6 +13,9 @@ namespace XUnit.Test.UnitTest
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            // Регистрация провайдера кодировок
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             // добавляем поставщика переменных окружения в конфигурацию
             var configuration = new ConfigurationBuilder()
             .AddEnvironmentVariables()

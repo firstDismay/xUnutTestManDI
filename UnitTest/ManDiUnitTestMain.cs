@@ -10,11 +10,12 @@ using XUnit.Test.config;
 
 namespace XUnit.Test.UnitTest
 {
-    [Collection("ManDiTestCollection")]
+    [CollectionDefinition("ManDiTestCollection", DisableParallelization = true)]
+    [Order(1)]
     [TestCaseOrderer(
     ordererTypeName: "XUnit.Test.config.PriorityOrderer",
     ordererAssemblyName: "XUnit.Test")]
-    public class ManDiUnitTest
+    public partial class ManDiUnitTest
     {
         private static ServiceProvider _serviceProvider;
 
@@ -31,6 +32,7 @@ namespace XUnit.Test.UnitTest
             var executor = _serviceProvider.GetRequiredService<ICommandExecutor>();
 
             conception_add conception_add = new conception_add()
+            
             {
                 iname = "Тестовая Концепция №3",
                 idesc = "Тестовая Концепция №3"
